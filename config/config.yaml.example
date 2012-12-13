@@ -1,0 +1,9 @@
+bot:
+    server:   irc.example.com
+    port:     6667
+    nick:     funkbot
+    channels: ['#funkbot']
+    verbose:  true
+
+log:
+    dir: logs
