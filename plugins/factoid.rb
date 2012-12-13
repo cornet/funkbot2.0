@@ -39,7 +39,8 @@ class Factoid
     if @store.has_key? item
       m.reply "But #{item} is #{@store[item].join(' or ')}"
     else
-      save_factoid(m, item, fact)
+      add_or_update_fact(item, fact)
+      m.reply 'ok'
     end
   end
 
