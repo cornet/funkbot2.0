@@ -15,18 +15,17 @@ class Factoid
 
   def listen(m)
     if m.message =~ /(.*)\?/
-      prefixes = [ 'iirc,', 'hum... I think', 'Maybe', 'well, duh.']
+      prefixes = ['iirc,', 'hum... I think', 'Maybe', 'well, duh.']
 
       if @store.has_key? $1
-
         fact = @store[$1].sample
-
         if fact =~ /<reply>(.*)/
           m.channel.action $1
         else
           m.reply "#{prefixes.sample} #{$1} is #{fact}"
         end
       end
+
     end
   end
 
