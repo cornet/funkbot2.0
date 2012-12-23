@@ -3,6 +3,7 @@ require 'cinch'
 class Botsnack
   include Cinch::Plugin
 
+  set :prefix, lambda{ |m| Regexp.new("^|" + Regexp.escape(m.bot.nick + ": " ))}
   match /botsnack/
 
   def execute(m)

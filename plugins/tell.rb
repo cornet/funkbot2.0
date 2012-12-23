@@ -8,6 +8,8 @@ class Tell
     @store = Funkbot::Storage.new('tell')
   end
 
+  set prefix: ""
+
   listen_to :message
   match /tell (.+?) (.+)/
 
