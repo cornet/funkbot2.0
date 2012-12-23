@@ -16,6 +16,7 @@ class Google
     title = res.text
     link = res.at('a')[:href]
     link.sub!(/^\/url\?q=/, '')
+    link.sub!(/&.*$/, '')
 
     CGI.unescape_html "#{title} : #{link}"
   rescue
