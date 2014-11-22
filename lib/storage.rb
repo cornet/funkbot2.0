@@ -1,9 +1,8 @@
-require 'redis'
+require 'sequel'
 require 'json'
 
 module Funkbot
   class Storage
-
     # Public: Setup connection to redis
     #
     # plugin     - The plugin name String
@@ -11,8 +10,11 @@ module Funkbot
     #
     # Returns storage object
     def initialize(plugin, connection = {})
-      @redis = Redis.new(connection)
-      @base  = plugin
+      puts plugin
+      puts connection
+      @db = Sequel.connect(connection)
+      @ds = @db[:store]
+      @plugin = plugin
     end
 
     # Public: Check if key exists
@@ -21,7 +23,7 @@ module Funkbot
     #
     # Returns True if exists, False if not
     def has_key?(key)
-      @redis.exists(ns_key(key))
+      !@ds.where(:plugin => @plugin, :key => key).empty?
     end
 
     # Public: Get key value
@@ -30,7 +32,7 @@ module Funkbot
     #
     # Returns the value Object or nil
     def [](key)
-      unserialize(@redis.get(ns_key(key)))
+      unserialize @ds.where(:plugin => @plugin, :key => key).get(:value)
     end
 
     # Public: Save a key to redis
@@ -40,7 +42,7 @@ module Funkbot
     #
     # Returns nothing
     def []=(key, value)
-      @redis.set ns_key(key), serialize(value)
+      upsert(key, serialize(value))
     end
 
     # Public: Delete a key
@@ -49,7 +51,7 @@ module Funkbot
     #
     # Returns nothing
     def delete(key)
-      @redis.del ns_key(key)
+      @ds.where(:plugin => @plugin, :key => key).delete
     end
 
     private
@@ -78,14 +80,17 @@ module Funkbot
       end
     end
 
-    # Private: Namespace a key
+    # Private: Update existing key or insert new if not already present
     #
-    # key - String or Symbol key to namespace
+    # key - String or Symbol of key
+    # value - String containing the value
     #
-    # Returns the namespaced key String
-    def ns_key(key)
-      "#{@base}::#{key.to_s}"
+    # Returns true if succesful, false if not
+    def upsert(key, value)
+      rec = @ds.where(:plugin => @plugin, :key => key)
+      if 1 != rec.update(:value => value)
+        @ds.insert(:plugin => @plugin, :key => key, :value => value)
+      end
     end
-
   end
 end

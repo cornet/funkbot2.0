@@ -19,6 +19,8 @@ funkbot = Cinch::Bot.new do
     c.verbose          = $config.bot.verbose
     c.plugins.plugins  = [Greeting,Botsnack,Google,Tell,Factoid,IMDb]
     c.plugins.prefix   = ""
+    c.ssl.use          = $config.bot.ssl
+    c.ssl.verify       = $config.bot.ssl_verify
   end
 end
 

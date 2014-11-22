@@ -1,6 +1,7 @@
 source "http://rubygems.org"
 gem "cinch"
 gem "rspec"
-gem "redis"
 gem "nokogiri"
 gem "filmbuff"
+gem "mysql2"
+gem "sequel"
