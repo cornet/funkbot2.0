@@ -13,7 +13,7 @@ Simple IRC bot based on [Cinch](https://github.com/cinchrb/cinch) and using MySQ
 
 ## Configuring Funkbot
 
-Check out config/config.yaml, make sure you have a redis server running.
+Copy config/config.yaml.example config/config.yaml and edit to requirements.
 
 
 ## Running Funkbot
