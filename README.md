@@ -18,5 +18,5 @@ Check out config/config.yaml, make sure you have a redis server running.
 
 ## Running Funkbot
 
-    ./funkbot.rb
+    bundle exec ./funkbot.rb
 
