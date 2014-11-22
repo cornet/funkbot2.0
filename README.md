@@ -2,7 +2,7 @@
 
 ## About
 
-Simple IRC bot based on [Cinch](https://github.com/cinchrb/cinch) and using Redis for storage.
+Simple IRC bot based on [Cinch](https://github.com/cinchrb/cinch) and using MySQL for storage.
 
 ## Install
 
