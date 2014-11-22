@@ -1,12 +1,12 @@
 bot:
-    server:     irc.example.com
-    port:       6667
-    nick:       funkbot
-    channels:   ['#funkbot']
-    verbose:    true
-    ssl:        false
-    ssl_verify: true
-    db_host:     10.64.161.83
+    server:      irc.example.com
+    port:        6667
+    nick:        funkbot
+    channels:    ['#funkbot']
+    verbose:     true
+    ssl:         false
+    ssl_verify:  true
+    db_host:     127.0.0.1
     db_user:     funkbot
     db_pass:     password
     db_database: funkbot
