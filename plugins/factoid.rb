@@ -14,11 +14,12 @@ class Factoid
   end
 
   listen_to :message
-  match /(.+?) (is|are) (.+)/,       method: :add_factoid
-  match /(.+?) (is|are) also (.+)/,  method: :save_factoid
-  match /forget (.+)/,               method: :delete_factoid
+  match /(.+?) (is|are) (.+)/,       method: :add_factoid, use_prefix: false
+  match /(.+?) (is|are) also (.+)/,  method: :save_factoid, use_prefix: false
+  match /forget (.+)/,               method: :delete_factoid, use_prefix: false
 
   def listen(m)
+    m.message.sub!(/^#{$config.bot.nick}:\s*/, '')
     if m.message =~ /(.*)\?/
       prefixes = ['iirc,', 'hum... I think', 'Maybe', 'well, duh.']
 
@@ -41,6 +42,8 @@ class Factoid
       return nil
     end
 
+    item.sub!(/^#{$config.bot.nick}:\s*/, '')
+
     if @store.has_key? item
       m.reply "But #{item} #{@store[item].join(' or ')}"
     else
@@ -49,10 +52,12 @@ class Factoid
   end
 
   def save_factoid(m, item, type, fact)
+    item.sub!(/^#{$config.bot.nick}:\s*/, '')
     add_or_update_fact(item, "#{type} #{fact}")
   end
 
   def delete_factoid(m, item)
+    item.sub!(/^#{$config.bot.nick}:\s*/, '')
     if @store.has_key?(item)
       @store.delete(item)
       m.reply "I've forgotton all about #{item}"
