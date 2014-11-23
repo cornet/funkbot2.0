@@ -17,15 +17,17 @@ class Factoid
   match /(.+?) (is|are) (.+)/,       method: :add_factoid, use_prefix: false
   match /(.+?) (is|are) also (.+)/,  method: :save_factoid, use_prefix: false
   match /forget (.+)/,               method: :delete_factoid, use_prefix: false
+  match /literal (.*)\?/,            method: :show_factoid, use_prefix: false
 
   def listen(m)
     m.message.sub!(/^#{$config.bot.nick}:\s*/, '')
     if m.message =~ /(.*)\?/
       prefixes = ['iirc,', 'hum... I think', 'Maybe', 'well, duh.']
 
-      if @store.has_key? $1
-        key = $1
-        fact = @store[$1].sample
+      key = $1
+
+      if @store.has_key? key
+        fact = @store[key].sample
         if fact =~ /<reply>(.*)/
           m.channel.action $1
         else
@@ -48,6 +50,14 @@ class Factoid
       m.reply "But #{item} #{@store[item].join(' or ')}"
     else
       add_or_update_fact(item, "#{type} #{fact}")
+    end
+  end
+
+  def show_factoid(m, item)
+    if @store.has_key? item
+      m.reply "#{item} is #{@store[item].join(' or ')}"
+    else
+      m.reply "I know nothing about #{item}"
     end
   end
 
