@@ -3,6 +3,8 @@ require 'cinch'
 class Botsnack
   include Cinch::Plugin
 
+  set :help, "give the bot a botsnack"
+
   match /botsnack/, :use_prefix => false
 
   def execute(m)

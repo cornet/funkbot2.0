@@ -3,7 +3,7 @@ require 'cinch'
 class Greeting
   include Cinch::Plugin
 
-  match /(hello|hi|ello|morning|afternoon|evening)/i, use_prefix: false
+  match /^(hello|hi|ello|morning|afternoon|evening)(\W+.*|$)/i, use_prefix: false
 
   def execute(m)
     greetings = ['Hi', 'Hello',' Hola!']
