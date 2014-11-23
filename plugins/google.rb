@@ -7,7 +7,7 @@ class Google
   include Cinch::Plugin
   set plugin_name: "google", help: "google <query> - Search google for <query>"
 
-  match /google (.+)/
+  match /google (.+)/, use_prefix: false
 
   def self.search(query)
     url = "http://www.google.com/search?q=#{CGI.escape(query)}"

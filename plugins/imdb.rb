@@ -5,7 +5,7 @@ class IMDb
   include Cinch::Plugin
   set :help, "!imdb <title> - Search for film <title>"
 
-  match /imdb (.+)/i
+  match /imdb (.+)/i, use_prefix: false
 
   def self.search(title)
     @imdb = FilmBuff::IMDb.new
