@@ -1,5 +1,5 @@
 source "http://rubygems.org"
-gem "cinch"
+gem "cinch", "2.1.0"
 gem "rspec"
 gem "nokogiri"
 gem "filmbuff"
