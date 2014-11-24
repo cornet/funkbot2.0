@@ -21,6 +21,17 @@ funkbot = Cinch::Bot.new do
     c.plugins.prefix   = ""
     c.ssl.use          = $config.bot.ssl
     c.ssl.verify       = $config.bot.ssl_verify
+
+    # Plugin Options
+    c.plugins.options[Factoid] = {
+      store: Funkbot::Storage.new('factoid',{
+        :adapter => 'mysql2',
+        :host => $config.bot.db_host,
+        :user => $config.bot.db_user,
+        :password => $config.bot.db_pass,
+        :database => $config.bot.db_database
+      })
+    }
   end
 end
 
