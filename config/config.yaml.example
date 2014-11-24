@@ -13,3 +13,9 @@ bot:
 
 log:
     dir: logs
+
+twitter:
+    consumer_key:    foo
+    consumer_secret: bar
+    access_token:    woo
+    access_secret:   yay
