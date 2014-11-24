@@ -42,30 +42,33 @@ describe Factoid do
         end
       end
 
-      context 'when has a fact with single response' do
-        let(:subject) { 'cows' }
+      context 'when has a fact' do
         before(:each) do
           allow(store).to receive(:has_key?).and_return(true)
-          allow(store).to receive(:[]).with(subject).and_return(['is foo'])
         end
-        it 'should reply' do
-          message = make_message(bot,"#{subject}?", channel: channel, nick: nick)
-          replies = get_replies(message)
-          expect(replies.first[:text]).to match /^.* #{subject} is foo$/
+        context 'when has a fact with single response' do
+          let(:subject) { 'cows' }
+          before(:each) do
+            allow(store).to receive(:[]).with(subject).and_return(['is foo'])
+          end
+          it 'should reply' do
+            message = make_message(bot,"#{subject}?", channel: channel, nick: nick)
+            replies = get_replies(message)
+            expect(replies.first[:text]).to match /^.* #{subject} is foo$/
+          end
         end
-      end
 
-      context 'when has a fact with multiple responses' do
-        let(:subject) { 'cows' }
-        let(:facts) { ['is foo','are bah'] }
-        before(:each) do
-          allow(store).to receive(:has_key?).and_return(true)
-          allow(store).to receive(:[]).with(subject).and_return(facts)
-        end
-        it 'should reply' do
-          message = make_message(bot, "#{subject}?", channel: channel, nick: nick)
-          replies = get_replies(message)
-          expect(replies.first[:text]).to match /^.* #{subject} (#{facts.join('|')})$/
+        context 'when has a fact with multiple responses' do
+          let(:subject) { 'cows' }
+          let(:facts) { ['is foo','are bah'] }
+          before(:each) do
+            allow(store).to receive(:[]).with(subject).and_return(facts)
+          end
+          it 'should reply' do
+            message = make_message(bot, "#{subject}?", channel: channel, nick: nick)
+            replies = get_replies(message)
+            expect(replies.first[:text]).to match /^.* #{subject} (#{facts.join('|')})$/
+          end
         end
       end
     end
