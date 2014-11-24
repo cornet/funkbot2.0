@@ -1,4 +1,4 @@
-source "http://rubygems.org"
+source "https://rubygems.org"
 gem "cinch", "2.1.0"
 gem "rspec"
 gem "nokogiri"
