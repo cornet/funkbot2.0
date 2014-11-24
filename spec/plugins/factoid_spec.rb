@@ -31,12 +31,12 @@ describe Factoid do
 
     context 'when message ends in a ?' do
       context 'when no fact' do
-        let(:content) { 'ssdkjhasd?' }
+        let(:content) { 'cows' }
         before(:each) do
           allow(store).to receive(:has_key?).and_return(false)
         end
         it 'stays quiet' do
-          message = make_message(bot, content, channel: channel, nick: nick)
+          message = make_message(bot, "#{content}?", channel: channel, nick: nick)
           replies = get_replies(message)
           expect(replies).to be_empty
         end
