@@ -34,6 +34,8 @@ class Factoid
   end
 
   def add_factoid(msg, item, type, fact)
+    return nil if msg.action?
+
     # Ignore if "is also" since this method will fire in that case
     if fact =~ /also /
       return nil
@@ -49,6 +51,8 @@ class Factoid
   end
 
   def show_factoid(msg, item)
+    return nil if msg.action?
+
     if @store.has_key? item
       msg.reply "#{item} is #{@store[item].join(' or ')}"
     else
@@ -57,11 +61,15 @@ class Factoid
   end
 
   def save_factoid(msg, item, type, fact)
+    return nil if msg.action?
+
     item.sub!(/^#{msg.bot.nick}:\s*/, '')
     add_or_update_fact(item, "#{type} #{fact}")
   end
 
   def delete_factoid(msg, item)
+    return nil if msg.action?
+
     item.sub!(/^#{msg.bot.nick}:\s*/, '')
     if @store.has_key?(item)
       @store.delete(item)
