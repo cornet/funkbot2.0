@@ -44,7 +44,7 @@ class Factoid
     item.sub!(/^#{msg.bot.nick}:\s*/, '')
 
     if @store.has_key? item
-      msg.reply "But #{item} #{@store[item].join(' or ')}"
+      msg.reply "But #{item} #{@store[item].sample}"
     else
       add_or_update_fact(item, "#{type} #{fact}")
     end
