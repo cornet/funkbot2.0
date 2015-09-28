@@ -14,7 +14,7 @@ describe Factoid do
     $config = Funkbot::Conf.new(YAML.load_file('./config/config.yaml'))
   end
 
-  let!(:nick) { 'melon' }
+  let!(:nick) { 'bob' }
   let!(:channel) { '#jibjib' }
   let!(:store) { double('Funkbot::Storage') }
   let!(:bot) { make_bot(Factoid, store: store) }
