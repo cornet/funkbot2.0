@@ -32,6 +32,16 @@ funkbot = Cinch::Bot.new do
         :database => $config.bot.db_database
       })
     }
+
+    c.plugins.options[Tell] = {
+      store: Funkbot::Storage.new('tell',{
+        :adapter => 'mysql2',
+        :host => $config.bot.db_host,
+        :user => $config.bot.db_user,
+        :password => $config.bot.db_pass,
+        :database => $config.bot.db_database
+      })
+    }
   end
 end
 
