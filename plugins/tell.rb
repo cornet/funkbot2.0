@@ -9,7 +9,7 @@ class Tell
   end
 
   listen_to :message
-  match /tell (.+?) (.+)/, use_prefix: false
+  match /^tell (.+?) (.+)/, use_prefix: false
 
   def listen(m)
     if @store.has_key?(m.user.nick)
