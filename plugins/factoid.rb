@@ -9,10 +9,10 @@ class Factoid
   end
 
   listen_to :message
-  match /^(.+?) (is|are) (.+)/,       method: :add_factoid, use_prefix: true
-  match /^(.+?) (is|are) also (.+)/,  method: :save_factoid, use_prefix: true
-  match /^forget (.+)/,               method: :delete_factoid, use_prefix: true
-  match /^literal (.*)\?/,            method: :show_factoid, use_prefix: true
+  match /(.+?) (is|are) (.+)/,       method: :add_factoid
+  match /(.+?) (is|are) also (.+)/,  method: :save_factoid
+  match /forget (.+)/,               method: :delete_factoid
+  match /literal (.*)\?/,            method: :show_factoid
 
   def listen(msg)
     msg.message.sub!(/^#{msg.bot.nick}:\s*/, '')

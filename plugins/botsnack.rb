@@ -5,7 +5,7 @@ class Botsnack
 
   set :help, "give the bot a botsnack"
 
-  match /botsnack/, :use_prefix => true
+  match /botsnack/
 
   def execute(m)
     replies  = ['yay', ':)', '<reply>beams','<reply>smiles']
