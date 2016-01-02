@@ -10,10 +10,6 @@ require './lib/storage.rb'
 describe Factoid do
   include Cinch::Test
 
-  before(:each) do
-    $config = Funkbot::Conf.new(YAML.load_file('./config/config.yaml'))
-  end
-
   let!(:nick) { 'bob' }
   let!(:channel) { '#jibjib' }
   let!(:store) { double('Funkbot::Storage') }
