@@ -13,7 +13,7 @@ describe Greeting do
   let!(:nick) { 'bob' }
   let!(:channel) { '#jibjib' }
   let!(:store) { double('Funkbot::Storage') }
-  let!(:greetings) { ["Hi #{nick}","Hello #{nick}","Hola! #{nick}"] }
+  let!(:greetings) { ["Hi #{nick}", "Hello #{nick}", "Hola! #{nick}"] }
   let!(:bot) { make_bot(Greeting) }
 
   describe 'listen' do
